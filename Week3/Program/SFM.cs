@@ -22,7 +22,7 @@ namespace SFM {
             items.AddRange(dirInfo.GetFiles());
         }
 
-        public void refresh() {
+        public void refresh() { // Files/Directories can be renamed/deleted, this function updates directories
             items = new List<FileSystemInfo>();
             items.AddRange(dirInfo.GetDirectories());
             items.AddRange(dirInfo.GetFiles());
@@ -32,10 +32,10 @@ namespace SFM {
         public void Process(int v) {
             this.index += v;
             if (this.index < 0) {
-                this.index = items.Count - 1;
+                this.index = items.Count - 1; // go to end
             }
             if (this.index >= items.Count) {
-                this.index = 0;
+                this.index = 0; // to to beginning
             }
         }
 
@@ -107,7 +107,7 @@ namespace SFM {
             Console.Clear();
 
             for (int i = 0; i < activeLayer.items.Count; ++i) {
-                if (i == activeLayer.index) {
+                if (i == activeLayer.index) { // Cursor at this file
                     Console.BackgroundColor = ConsoleColor.Cyan;
                 } else {
                     Console.BackgroundColor = ConsoleColor.Blue;
@@ -158,18 +158,18 @@ namespace SFM {
         public void Process(ConsoleKeyInfo pressedKey) {
             switch (pressedKey.Key) {
                 case ConsoleKey.UpArrow:
-                    activeLayer.Process(-1);
+                    activeLayer.Process(-1); // move up
                     break;
                 case ConsoleKey.DownArrow:
-                    activeLayer.Process(1);
+                    activeLayer.Process(1); // move down
                     break;
                 case ConsoleKey.Enter:
                     try {
-                        if (activeLayer.items[activeLayer.index].GetType() == typeof(DirectoryInfo)) {
+                        if (activeLayer.items[activeLayer.index].GetType() == typeof(DirectoryInfo)) { // open new folder
                             mode = Mode.Explorer;
                             layerHistory.Push(activeLayer);
                             activeLayer = new Layer(activeLayer.GetSelectedItemInfo(), 0);
-                        } else if (activeLayer.items[activeLayer.index].GetType() == typeof(FileInfo)) {
+                        } else if (activeLayer.items[activeLayer.index].GetType() == typeof(FileInfo)) { // open file
                             mode = Mode.FileReader;
 
 
@@ -180,24 +180,24 @@ namespace SFM {
                     break;
                 case ConsoleKey.Backspace:
                     if (mode == Mode.Explorer) {
-                        activeLayer = layerHistory.Pop();
+                        activeLayer = layerHistory.Pop(); // move to parent folder
                     } else if (mode == Mode.FileReader) {
-                        mode = Mode.Explorer;
+                        mode = Mode.Explorer; // close file
                     }
 
                     break;
                 case ConsoleKey.Insert:
-                    if(mode == Mode.Explorer) {
+                    if(mode == Mode.Explorer) { // rename file
                         Rename();
                     } else {
-                        break;
+                        break; /// do nothing
                     }
                     break;
                 case ConsoleKey.Delete:
                     if(mode == Mode.Explorer) {
-                        Delete();
+                        Delete(); // delete file
                     } else {
-                        break;
+                        break; // do nothing
                     }
                     break;
 
