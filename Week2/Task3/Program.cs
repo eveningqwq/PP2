@@ -12,10 +12,10 @@ namespace Task3 {
             if(dir == null) {
                 return;
             }
-            string s = new string('\t', depth) + dir.Name;
+            string s = new string('\t', depth) + dir.Name; // print depth tabs and name
 
             Console.WriteLine(s);
-            if(dir.GetType() == typeof(DirectoryInfo)) {
+            if(dir.GetType() == typeof(DirectoryInfo)) { // If this is folder
                 foreach(var i in (dir as DirectoryInfo).GetFileSystemInfos()) {
                     Print(i, depth + 1);
                 }

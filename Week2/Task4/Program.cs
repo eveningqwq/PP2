@@ -9,11 +9,11 @@ namespace Task4 {
     class Program {
         static void Main(string[] args) {
             string path = @"C:\Users\0\source\repos\Week2\test.txt";
-            var f = File.Create(path);
-            f.Close();
+            var f = File.Create(path); // create new file
+            f.Close(); // close 
             string to = @"C:\Users\0\source\repos\Week2\..\test.txt";
-            File.Copy(path, to);
-            File.Delete(path);
+            File.Copy(path, to); // Copy
+            File.Delete(path); // delete original
         }
     }
 }

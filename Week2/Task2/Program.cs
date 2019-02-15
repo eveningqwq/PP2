@@ -22,11 +22,11 @@ namespace Task2 {
             FileStream inf = new FileStream(@"C:\Users\0\source\repos\Week2\Task2\input.txt", FileMode.Open, FileAccess.Read);
             FileStream outf = new FileStream(@"C:\Users\0\source\repos\Week2\Task2\output.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
             StreamReader rf = new StreamReader(inf);
-            var nums = rf.ReadLine().Split(' ');
+            var nums = rf.ReadLine().Split(' '); // split by spaces
             List<int> elems = new List<int>();
             for (int i = 0; i < nums.Length; ++i) {
-                int val = Int32.Parse(nums[i]);
-                if (Prime(val) == true) {
+                int val = Int32.Parse(nums[i]); // convert to int
+                if (Prime(val) == true) { // if prime add to our answer
                     elems.Add(val);
                 }
             }
@@ -34,6 +34,7 @@ namespace Task2 {
             for(int i = 0; i < elems.Count; ++i) {
                 wf.Write(elems[i] + " ");
             }
+            // Close all streams
             rf.Close();
             wf.Close();
             inf.Close();

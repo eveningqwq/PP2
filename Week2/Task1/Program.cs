@@ -11,9 +11,11 @@ namespace Week2 {
         static bool palindrome(string x) {
             for (int i = 0; i < x.Length; ++i) {
                 if (x[i] != x[x.Length - i - 1]) {
+                    // not palindrome
                     return false;
                 }
             }
+            // everything okay, palindrome
             return true;
         }
 
@@ -26,8 +28,8 @@ namespace Week2 {
             } else {
                 Console.WriteLine("NO");
             }
-            fs.Close();
-            sr.Close();
+            fs.Close(); // close streams
+            sr.Close(); // close streams
         }
     }
 }
